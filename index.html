@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Personality Color</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    transition:1s;
+    overflow:hidden;
+    background:#222;
+    color:white;
+}
+
+/* Container */
+.container{
+    text-align:center;
+    z-index:2;
+}
+
+h1{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+p{
+    margin-bottom:20px;
+    font-size:18px;
+}
+
+input{
+    padding:15px;
+    width:300px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:18px;
+    text-align:center;
+}
+
+/* Ombak */
+.wave{
+    position:absolute;
+    bottom:0;
+    width:200%;
+    height:200px;
+    background:rgba(255,255,255,0.2);
+    border-radius:45%;
+    animation:wave 8s linear infinite;
+    display:none;
+}
+
+.wave2{
+    animation-duration:12s;
+    opacity:0.5;
+}
+
+@keyframes wave{
+    0%{
+        transform:translateX(0);
+    }
+    100%{
+        transform:translateX(-50%);
+    }
+}
+
+/* Api */
+.fire{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:radial-gradient(circle, rgba(255,100,0,0.4), transparent);
+    animation:fire 1s infinite alternate;
+    display:none;
+}
+
+@keyframes fire{
+    from{
+        opacity:0.5;
+    }
+    to{
+        opacity:1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="fire" id="fire"></div>
+
+<div class="wave" id="wave1"></div>
+<div class="wave wave2" id="wave2"></div>
+
+<div class="container">
+    <h1>The Personality Color</h1>
+    <p>Ketik perasaanmu hari ini...</p>
+
+    <input type="text" id="moodInput" placeholder="contoh: marah / tenang">
+</div>
+
+<script>
+const input = document.getElementById("moodInput");
+
+const fire = document.getElementById("fire");
+const wave1 = document.getElementById("wave1");
+const wave2 = document.getElementById("wave2");
+
+input.addEventListener("input", function(){
+
+    let mood = input.value.toLowerCase();
+
+    // RESET
+    fire.style.display = "none";
+    wave1.style.display = "none";
+    wave2.style.display = "none";
+
+    // MARAH
+    if(mood.includes("marah")){
+        document.body.style.background =
+        "linear-gradient(to bottom, #ff0000, #550000)";
+
+        fire.style.display = "block";
+    }
+
+    // TENANG
+    else if(mood.includes("tenang")){
+        document.body.style.background =
+        "linear-gradient(to bottom, #4facfe, #001f3f)";
+
+        wave1.style.display = "block";
+        wave2.style.display = "block";
+    }
+
+    // SENANG
+    else if(mood.includes("senang")){
+        document.body.style.background =
+        "linear-gradient(to bottom, #ffe259, #ffa751)";
+    }
+
+    // SEDIH
+    else if(mood.includes("sedih")){
+        document.body.style.background =
+        "linear-gradient(to bottom, #434343, #000000)";
+    }
+
+    // DEFAULT
+    else{
+        document.body.style.background = "#222";
+    }
+
+});
+</script>
+
+</body>
+</html>
